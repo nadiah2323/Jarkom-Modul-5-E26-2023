@@ -57,6 +57,22 @@ iptables -A INPUT -p udp -j DROP
 iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
 ```
 ### 3. Kepala Suku North Area meminta kalian untuk membatasi DHCP dan DNS Server hanya dapat dilakukan ping oleh maksimal 3 device secara bersamaan, selebihnya akan di drop.
+```bash
+iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
+```
+
+`-A INPUT`: Opsi ini menambahkan aturan ke akhir tabel yang ditentukan (INPUT dalam kasus ini). Tabel INPUT digunakan untuk paket masuk yang ditujukan untuk sistem lokal.
+
+`-p icmp`: Ini menentukan protokol yang akan dicocokkan, dalam hal ini, ICMP (Internet Control Message Protocol), yang biasanya digunakan untuk permintaan ping.
+
+`-m connlimit`: Modul ini memungkinkan Anda untuk mencocokkan jumlah koneksi yang dimiliki host dalam jangka waktu tertentu.
+
+`--connlimit-above 3`: Opsi ini menetapkan ambang batas untuk jumlah koneksi bersamaan. Aturan akan cocok jika jumlah koneksi bersamaan melebihi 3.
+
+`--connlimit-mask 0`: Opsi ini menentukan mask yang akan diterapkan saat memeriksa koneksi bersamaan. Mask 0 berarti bahwa perbandingan harus dilakukan pada basis per-IP, mempertimbangkan semua koneksi terlepas dari port sumber tertentu.
+
+`-j DROP`: Jika kondisi yang ditentukan dalam aturan terpenuhi (misalnya, jika jumlah koneksi bersamaan di atas 3), tindakan yang dilakukan adalah drop (membuang) paket. Dengan kata lain, setiap permintaan ping tambahan di luar batas yang ditentukan akan di-drop, yang secara efektif membatasi jumlah ping simultan dari satu sumber.
+
 
 ### 4. Lakukan pembatasan sehingga koneksi SSH pada Web Server hanya dapat dilakukan oleh masyarakat yang berada pada GrobeForest.
 ```bash
