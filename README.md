@@ -1,7 +1,7 @@
 # Jarkom-Modul-5-E26-2023
 
 Tugas pertama, buatlah peta wilayah sesuai berikut ini:
-
+<img src=soal.png>
 Keterangan:	Richter adalah DNS Server
 - Revolte adalah DHCP Server 
 - Sein dan Stark adalah Web Server
@@ -12,7 +12,13 @@ Keterangan:	Richter adalah DNS Server
 
 Untuk menghitung rute-rute yang diperlukan, gunakan perhitungan dengan metode VLSM. Buat juga pohonnya, dan lingkari subnet yang dilewati.
 
+<img src=subnet.png>
+
+<img src=pembagian-ip.png>
+
 Kemudian buatlah rute sesuai dengan pembagian IP yang kalian lakukan.
+
+<img src=rute.png>
 
 Tugas berikutnya adalah memberikan ip pada subnet SchwerMountain, LaubHills, TurkRegion, dan GrobeForest menggunakan bantuan DHCP.
 
